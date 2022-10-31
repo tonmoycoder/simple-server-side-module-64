@@ -20,7 +20,14 @@ const users =[
 ];
 
 app.get( "/users" ,(req,res) => {
+    // filter search by query
+    if(req.query){
+        const search = req.query.name;
+        const filteredUsers = users.filter(fUser => fUser.name.toLowerCase().indexOf(search) >= 0)
+        res.send(filteredUsers)
+    }
     res.send(users)
+    console.log(req.query)
 })
 
 app.post( '/users', (req,res) => {
